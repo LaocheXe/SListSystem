@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="Server List" lan="LAN_SLS_NAME" version="1.0" date="2019-09-07" compatibility="2.0" installRequired="true" >
+	<author name="LaocheXe" url="https://github.com/laochexe" />
+	<summary lan="">Game Server List Viwer</summary>
+	<description lan="">List game servers on you website using gametracker, or other methods of your choice.</description>
+	<keywords>
+		<word>gaming</word>
+		<word>servers</word>
+		<word>list</word>
+	</keywords>
+	<category>misc</category>
+	<copyright>LaocheXe</copyright>
+	<adminLinks>
+		<link url="admin_config.php" description="" icon="" iconSmall="" icon128="" primary="true" >LAN_CONFIGURE</link>
+	</adminLinks>
+	<pluginPrefs>
+		<pref name='sl_cathdr'></pref>
+		<pref name='sl_catftr'>4</pref>
+	</pluginPrefs>
+</e107Plugin>
