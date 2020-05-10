@@ -1,5 +1,6 @@
 <?php
-	
+
+// NOTE: There are 87 Supported Servers - So there should be 88 selections (0-87) 0 = Other	
 
 // slistsys Shortcodes file
 

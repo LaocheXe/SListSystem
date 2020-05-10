@@ -24,7 +24,7 @@ class slistsys_url // plugin-folder + '_url'
 	function config() 
 	{
 		$config = array();
-
+	/*
 		$config['other'] = array(
 			'alias'         => 'slistsys',                            // default alias 'slistsys'. {alias} is substituted with this value below. Allows for customization within the admin area.
 			'regex'			=> '^{alias}/other/?$', 						// matched against url, and if true, redirected to 'redirect' below.
@@ -39,6 +39,28 @@ class slistsys_url // plugin-folder + '_url'
 			'sef'			=> 'slistsys', 							// used by e107::url(); to create a url from the db table.
 			'redirect'		=> '{e_PLUGIN}slistsys/slistsys.php', 		// file-path of what to load when the regex returns true.
 
+		);
+	*/
+	/*	$config['supported'] = array (
+			'alias'			=> 'GameQ',
+			'regex'			=> '^{alias}(.*)$',
+			'sef'			=> '{alias}/list', // <-- maybe change to supported, or support?
+			'redirect'		=> '{e_PLUGIN)slistsys/supported.php'
+		);
+		*/
+		
+		$config['supported'] = array(
+			'alias'         => 'gameq',
+			'regex'			=> '^{alias}(.*)$',
+			'sef'			=> '{alias}/gameq',
+			'redirect'		=> '{e_PLUGIN}slistsys/supported.php'	
+		);
+		
+		$config['servers'] = array(
+			'alias'         => 'servers',
+			'regex'			=> '^{alias}(.*)$',
+			'sef'			=> '{alias}/servers',
+			'redirect'		=> '{e_PLUGIN}slistsys/servers.php'
 		);
 
 		return $config;
