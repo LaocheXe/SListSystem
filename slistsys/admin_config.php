@@ -18,25 +18,9 @@ class slistsys_adminArea extends e_admin_dispatcher
 	protected $modes = array(	
 	
 		'main'	=> array(
-			'controller' 	=> 'serverlist_ui',
+			'controller' 	=> 'server_list_ui',
 			'path' 			=> null,
-			'ui' 			=> 'serverlist_form_ui',
-			'uipath' 		=> null
-		),
-		
-
-		'cat'	=> array(
-			'controller' 	=> 'serverlist_cat_ui',
-			'path' 			=> null,
-			'ui' 			=> 'serverlist_cat_form_ui',
-			'uipath' 		=> null
-		),
-		
-
-		'other1'	=> array(
-			'controller' 	=> 'serverlist_submission_ui',
-			'path' 			=> null,
-			'ui' 			=> 'serverlist_submission_form_ui',
+			'ui' 			=> 'server_list_form_ui',
 			'uipath' 		=> null
 		),
 		
@@ -48,12 +32,6 @@ class slistsys_adminArea extends e_admin_dispatcher
 
 		'main/list'			=> array('caption'=> LAN_MANAGE, 'perm' => 'P'),
 		'main/create'		=> array('caption'=> LAN_CREATE, 'perm' => 'P'),
-
-		'cat/list'			=> array('caption'=> LAN_MANAGE, 'perm' => 'P'),
-		'cat/create'		=> array('caption'=> LAN_CREATE, 'perm' => 'P'),
-
-		'other1/list'			=> array('caption'=> LAN_MANAGE, 'perm' => 'P'),
-		'other1/create'		=> array('caption'=> LAN_CREATE, 'perm' => 'P'),
 			
 		'main/prefs' 		=> array('caption'=> LAN_PREFS, 'perm' => 'P'),	
 
@@ -66,20 +44,20 @@ class slistsys_adminArea extends e_admin_dispatcher
 		'main/edit'	=> 'main/list'				
 	);	
 	
-	protected $menuTitle = 'Server List';
+	protected $menuTitle = 'Server List System';
 }
 
 
 
 
 				
-class serverlist_ui extends e_admin_ui
+class server_list_ui extends e_admin_ui
 {
 			
-		protected $pluginTitle		= 'Server List';
+		protected $pluginTitle		= 'Server List System';
 		protected $pluginName		= 'slistsys';
-	//	protected $eventName		= 'slistsys-serverlist'; // remove comment to enable event triggers in admin. 		
-		protected $table			= 'serverlist';
+	//	protected $eventName		= 'slistsys-server_list'; // remove comment to enable event triggers in admin. 		
+		protected $table			= 'server_list';
 		protected $pid				= 'server_id';
 		protected $perPage			= 10; 
 		protected $batchDelete		= true;
@@ -90,33 +68,38 @@ class serverlist_ui extends e_admin_ui
 	//	protected $sortParent      = 'somefield_parent';
 	//	protected $treePrefix      = 'somefield_title';
 
-	//	protected $tabs				= array('Tabl 1','Tab 2'); // Use 'tab'=>0  OR 'tab'=>1 in the $fields below to enable. 
+		protected $tabs				= array('Server Details','Query Details','Viewer Details','Custum Link'); // Use 'tab'=>0  OR 'tab'=>1 in the $fields below to enable. 
 		
 	//	protected $listQry      	= "SELECT * FROM `#tableName` WHERE field != '' "; // Example Custom Query. LEFT JOINS allowed. Should be without any Order or Limit.
 	
 		protected $listOrder		= 'server_id DESC';
-	
+	// TODO - Replace WITH LANS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		protected $fields 		= array (
 			'checkboxes'              => array (  'title' => '',  'type' => null,  'data' => null,  'width' => '5%',  'thclass' => 'center',  'forced' => true,  'class' => 'center',  'toggle' => 'e-multiselect',  'readParms' =>  array (),  'writeParms' =>  array (),),
 			'server_id'               => array (  'title' => LAN_ID,  'data' => 'int',  'width' => '5%',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'servercat_id'            => array (  'title' => LAN_ID,  'type' => 'dropdown',  'data' => 'int',  'width' => '5%',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',  'filter' => false,  'batch' => false,),
-			'server_name'             => array (  'title' => LAN_TITLE,  'type' => 'text',  'data' => 'int',  'width' => 'auto',  'inline' => true,  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'server_ip'               => array (  'title' => LAN_IP,  'type' => 'text',  'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'server_port'             => array (  'title' => 'Port',  'type' => 'text',  'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'server_pass'             => array (  'title' => 'Pass',  'type' => 'text',  'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'server_gsid'             => array (  'title' => 'Gsid',  'type' => 'text',  'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'server_enable_vcc'       => array (  'title' => 'Vcc',  'type' => 'boolean',  'data' => 'int',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'server_viewer_cc'        => array (  'title' => 'Cc',  'type' => 'textarea',  'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_name'             => array (  'title' => LAN_TITLE,  'type' => 'text', 'tab' => 0, 'data' => 'str',  'width' => 'auto',  'filter' => true,  'inline' => true,  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_type'             => array (  'title' => LAN_TYPE,  'type' => 'dropdown', 'tab' => 0, 'data' => 'str',  'width' => 'auto',  'batch' => true,  'filter' => true,  'inline' => true,  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_ip'               => array (  'title' => LAN_IP,  'type' => 'text', 'tab' => 0, 'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_port'             => array (  'title' => 'Port',  'type' => 'text', 'tab' => 0, 'data' => 'int',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_password'         => array (  'title' => 'Password',  'type' => 'text', 'tab' => 0, 'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_qport'            => array (  'title' => 'Query Port',  'type' => 'text', 'tab' => 1, 'data' => 'int',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_qname'            => array (  'title' => 'Query User',  'type' => 'text', 'tab' => 1, 'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_qpass'            => array (  'title' => 'Query Passwrod',  'type' => 'text', 'tab' => 1, 'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_enable_gq'        => array (  'title' => 'Use GameQ',  'type' => 'boolean', 'tab' => 2, 'data' => 'int',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_enable_sc'        => array (  'title' => 'Join Link',  'type' => 'boolean', 'tab' => 3, 'data' => 'int',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_sc'               => array (  'title' => 'Join Link Code',  'type' => 'textarea', 'tab' => 3, 'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_enable_vc'        => array (  'title' => 'Custom Viewer',  'type' => 'boolean', 'tab' => 2, 'data' => 'int',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_viewer_cc'        => array (  'title' => 'Custom Viewer Code',  'type' => 'textarea', 'tab' => 2, 'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
+			'server_sef'			  => array (  'title' => LAN_SEFURL, 'type' => 'text', 'tab' => 0, 'batch'=>true, 'inline'=>true, 'noedit'=>false, 'data' => 'str', 'width' => 'auto', 'help' => LAN_eWL_ADMIN_SEF, 'readParms' => '', 'writeParms' => 'sef=server_name&size=xxlarge', 'class' => 'left', 'thclass' => 'left',  ),
 			'options'                 => array (  'title' => LAN_OPTIONS,  'type' => null,  'data' => null,  'width' => '10%',  'thclass' => 'center last',  'class' => 'center last',  'forced' => true,  'readParms' =>  array (),  'writeParms' =>  array (),),
 		);		
 		
-		protected $fieldpref = array('server_name');
+		protected $fieldpref = array('server_name', 'server_type', 'server_enable_gq');
 		
 
 	//	protected $preftabs        = array('General', 'Other' );
 		protected $prefs = array(
-			'sl_cathdr'		=> array('title'=> 'Sl_cathdr', 'tab'=>0, 'type'=>'number', 'data' => 'str', 'help'=>'', 'writeParms' => array()),
-			'sl_catftr'		=> array('title'=> 'Sl_catftr', 'tab'=>0, 'type'=>'number', 'data' => 'str', 'help'=>'', 'writeParms' => array()),
+			'MenuPrefs'		=> array('title'=> 'MenuPrefs', 'tab'=>0, 'type'=>'text', 'data' => 'str', 'help'=>'', 'writeParms' => array()),
 		); 
 
 	
@@ -128,254 +111,80 @@ class serverlist_ui extends e_admin_ui
 				e107::getMessage()->addWarning("This plugin is not yet installed. Saving and loading of preference or table data will fail.");
 			}
 			
-			// Set drop-down values (if any). 
-			$this->fields['servercat_id']['writeParms']['optArray'] = array('servercat_id_0','servercat_id_1', 'servercat_id_2'); // Example Drop-down array. 
-	
+			// Lets Try to get the protocols (GameQ Identifier)
+			// Load auto loader
+			require_once(__DIR__ . '/libraries/GameQ/Autoloader.php'); // TODO - Make Sure This Is Correct Path
+
+			// Define the protocols path
+			$protocols_path = __DIR__ . "/libraries/GameQ/Protocols/"; // TODO - Make Sure This Is Correct Path
+
+			// Grab the dir with all the classes available
+			$dir = dir($protocols_path);
+
+			$protocols = [];
+
+			// Now lets loop the directories
+			while (false !== ($entry = $dir->read())) {
+				if (!is_file($protocols_path . $entry)) {
+					continue;
+				}
+
+				// Lets get some info on the class
+				$reflection = new ReflectionClass('\\GameQ\\Protocols\\' . pathinfo($entry, PATHINFO_FILENAME)); // TODO - Make Sure This Is Correct Path
+
+				// Check to make sure we can actually load the class
+				if (!$reflection->IsInstantiable()) {
+					continue;
+				}
+
+				// Load up the class so we can get info
+				$class = $reflection->newInstance();
+
+				// Add it to the list
+				$protocols[ $class->name() ] = [
+					'name'  => $class->nameLong(),
+					'state' => $class->state(),
+				];
+
+				// Unset the class
+				unset($class);
+			}
+
+			// Close the directory
+			unset($dir);
+			ksort($protocols);
+			
+			$this->serverType['other'] = "Other"; // TODO - Replace With LAN
+			
+			foreach ($protocols AS $gameq => $info)
+			{
+				$serverType = $info['name'];
+				$this->serverType[$gameq] = $serverType;
+			}
+ 
+			$this->fields['server_type']['writeParms'] = $this->serverType;
+			//$this->fields['server_type']['writeParms']['optArray'] = array('server_type_0','server_type_1', 'server_type_2'); // Example Drop-down array.
 		}
 
 		
 		// ------- Customize Create --------
 		
 		public function beforeCreate($new_data,$old_data)
-		{
-			return $new_data;
-		}
-	
-		public function afterCreate($new_data, $old_data, $id)
-		{
-			// do something
-		}
-
-		public function onCreateError($new_data, $old_data)
-		{
-			// do something		
-		}		
-		
-		
-		// ------- Customize Update --------
-		
-		public function beforeUpdate($new_data, $old_data, $id)
-		{
-			return $new_data;
-		}
-
-		public function afterUpdate($new_data, $old_data, $id)
-		{
-			// do something	
-		}
-		
-		public function onUpdateError($new_data, $old_data, $id)
-		{
-			// do something		
-		}		
-		
-		// left-panel help menu area. (replaces e_help.php used in old plugins)
-		public function renderHelp()
-		{
-			$caption = LAN_HELP;
-			$text = 'Some help text';
-
-			return array('caption'=>$caption,'text'=> $text);
-
-		}
-			
-	/*	
-		// optional - a custom page.  
-		public function customPage()
-		{
-			$text = 'Hello World!';
-			$otherField  = $this->getController()->getFieldVar('other_field_name');
-			return $text;
-			
-		}
-		
-	
-		
-		
-	*/
-			
-}
-				
-
-
-class serverlist_form_ui extends e_admin_form_ui
-{
-
-}		
-		
-
-				
-class serverlist_cat_ui extends e_admin_ui
-{
-			
-		protected $pluginTitle		= 'Server List';
-		protected $pluginName		= 'slistsys';
-	//	protected $eventName		= 'slistsys-serverlist_cat'; // remove comment to enable event triggers in admin. 		
-		protected $table			= 'serverlist_cat';
-		protected $pid				= 'scat_id';
-		protected $perPage			= 10; 
-		protected $batchDelete		= true;
-		protected $batchExport     = true;
-		protected $batchCopy		= true;
-
-	//	protected $sortField		= 'somefield_order';
-	//	protected $sortParent      = 'somefield_parent';
-	//	protected $treePrefix      = 'somefield_title';
-
-	//	protected $tabs				= array('Tabl 1','Tab 2'); // Use 'tab'=>0  OR 'tab'=>1 in the $fields below to enable. 
-		
-	//	protected $listQry      	= "SELECT * FROM `#tableName` WHERE field != '' "; // Example Custom Query. LEFT JOINS allowed. Should be without any Order or Limit.
-	
-		protected $listOrder		= 'scat_id DESC';
-	
-		protected $fields 		= array (
-			'checkboxes'              => array (  'title' => '',  'type' => null,  'data' => null,  'width' => '5%',  'thclass' => 'center',  'forced' => true,  'class' => 'center',  'toggle' => 'e-multiselect',  'readParms' =>  array (),  'writeParms' =>  array (),),
-			'scat_id'                 => array (  'title' => LAN_ID,  'data' => 'int',  'width' => '5%',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'scat_name'               => array (  'title' => LAN_TITLE,  'type' => 'text',  'data' => 'int',  'width' => 'auto',  'inline' => true,  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'options'                 => array (  'title' => LAN_OPTIONS,  'type' => null,  'data' => null,  'width' => '10%',  'thclass' => 'center last',  'class' => 'center last',  'forced' => true,  'readParms' =>  array (),  'writeParms' =>  array (),),
-		);		
-		
-		protected $fieldpref = array('scat_name');
-		
-	
-		public function init()
-		{
-			// This code may be removed once plugin development is complete. 
-			if(!e107::isInstalled('slistsys'))
+		{	
+			if(!empty($new_data['server_name']))
 			{
-				e107::getMessage()->addWarning("This plugin is not yet installed. Saving and loading of preference or table data will fail.");
+				$new_data['server_name'] = trim(e107::getParser()->toText($new_data['server_name']));
 			}
 			
-			// Set drop-down values (if any). 
-	
-		}
-
-		
-		// ------- Customize Create --------
-		
-		public function beforeCreate($new_data,$old_data)
-		{
-			return $new_data;
-		}
-	
-		public function afterCreate($new_data, $old_data, $id)
-		{
-			// do something
-		}
-
-		public function onCreateError($new_data, $old_data)
-		{
-			// do something		
-		}		
-		
-		
-		// ------- Customize Update --------
-		
-		public function beforeUpdate($new_data, $old_data, $id)
-		{
-			return $new_data;
-		}
-
-		public function afterUpdate($new_data, $old_data, $id)
-		{
-			// do something	
-		}
-		
-		public function onUpdateError($new_data, $old_data, $id)
-		{
-			// do something		
-		}		
-		
-		// left-panel help menu area. (replaces e_help.php used in old plugins)
-		public function renderHelp()
-		{
-			$caption = LAN_HELP;
-			$text = 'Some help text';
-
-			return array('caption'=>$caption,'text'=> $text);
-
-		}
-			
-	/*	
-		// optional - a custom page.  
-		public function customPage()
-		{
-			$text = 'Hello World!';
-			$otherField  = $this->getController()->getFieldVar('other_field_name');
-			return $text;
-			
-		}
-		
-	
-		
-		
-	*/
-			
-}
-				
-
-
-class serverlist_cat_form_ui extends e_admin_form_ui
-{
-
-}		
-		
-
-				
-class serverlist_submission_ui extends e_admin_ui
-{
-			
-		protected $pluginTitle		= 'Server List';
-		protected $pluginName		= 'slistsys';
-	//	protected $eventName		= 'slistsys-serverlist_submission'; // remove comment to enable event triggers in admin. 		
-		protected $table			= 'serverlist_submission';
-		protected $pid				= 'submit_id';
-		protected $perPage			= 10; 
-		protected $batchDelete		= true;
-		protected $batchExport     = true;
-		protected $batchCopy		= true;
-
-	//	protected $sortField		= 'somefield_order';
-	//	protected $sortParent      = 'somefield_parent';
-	//	protected $treePrefix      = 'somefield_title';
-
-	//	protected $tabs				= array('Tabl 1','Tab 2'); // Use 'tab'=>0  OR 'tab'=>1 in the $fields below to enable. 
-		
-	//	protected $listQry      	= "SELECT * FROM `#tableName` WHERE field != '' "; // Example Custom Query. LEFT JOINS allowed. Should be without any Order or Limit.
-	
-		protected $listOrder		= 'submit_id DESC';
-	
-		protected $fields 		= array (
-			'checkboxes'              => array (  'title' => '',  'type' => null,  'data' => null,  'width' => '5%',  'thclass' => 'center',  'forced' => true,  'class' => 'center',  'toggle' => 'e-multiselect',  'readParms' =>  array (),  'writeParms' =>  array (),),
-			'submit_id'               => array (  'title' => LAN_ID,  'data' => 'int',  'width' => '5%',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			's_game'                  => array (  'title' => 'Game',  'type' => 'text',  'data' => 'int',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			's_ip'                    => array (  'title' => LAN_IP,  'type' => 'text',  'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			's_port'                  => array (  'title' => 'Port',  'type' => 'text',  'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			's_pass'                  => array (  'title' => 'Pass',  'type' => 'text',  'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			's_gsid'                  => array (  'title' => 'Gsid',  'type' => 'text',  'data' => 'str',  'width' => 'auto',  'help' => '',  'readParms' =>  array (),  'writeParms' =>  array (),  'class' => 'left',  'thclass' => 'left',),
-			'options'                 => array (  'title' => LAN_OPTIONS,  'type' => null,  'data' => null,  'width' => '10%',  'thclass' => 'center last',  'class' => 'center last',  'forced' => true,  'readParms' =>  array (),  'writeParms' =>  array (),),
-		);		
-		
-		protected $fieldpref = array();
-		
-	
-		public function init()
-		{
-			// This code may be removed once plugin development is complete. 
-			if(!e107::isInstalled('slistsys'))
+			if(empty($new_data['server_sef']))
 			{
-				e107::getMessage()->addWarning("This plugin is not yet installed. Saving and loading of preference or table data will fail.");
+				$new_data['server_sef'] = eHelper::title2sef($new_data['server_name']);
+			}
+			else
+			{
+				$new_data['server_sef'] = eHelper::title2sef($new_data['server_sef']);
 			}
 			
-			// Set drop-down values (if any). 
-	
-		}
-
-		
-		// ------- Customize Create --------
-		
-		public function beforeCreate($new_data,$old_data)
-		{
 			return $new_data;
 		}
 	
@@ -394,6 +203,19 @@ class serverlist_submission_ui extends e_admin_ui
 		
 		public function beforeUpdate($new_data, $old_data, $id)
 		{
+			if(!empty($new_data['server_name']))
+			{
+				$new_data['server_name'] = trim(e107::getParser()->toText($new_data['server_name']));
+			}
+			
+			if(isset($new_data['server_sef']) && empty($new_data['server_sef']) && !empty($new_data['server_name']))
+			{
+				$new_data['server_sef'] = eHelper::title2sef($new_data['server_name']);
+			}
+			elseif(!empty($new_data['server_sef']))
+			{
+				$new_data['server_sef'] = eHelper::title2sef($new_data['server_sef']);
+			}
 			return $new_data;
 		}
 
@@ -410,8 +232,70 @@ class serverlist_submission_ui extends e_admin_ui
 		// left-panel help menu area. (replaces e_help.php used in old plugins)
 		public function renderHelp()
 		{
+			// Load auto loader
+			require_once(__DIR__ . '/libraries/GameQ/Autoloader.php'); // TODO - Make Sure This Is Correct Path
+
+			// Define the protocols path
+			$protocols_path = __DIR__ . "/libraries/GameQ/Protocols/"; // TODO - Make Sure This Is Correct Path
+
+			// Grab the dir with all the classes available
+			$dir = dir($protocols_path);
+
+			$protocols = [];
+
+			// Now lets loop the directories
+			while (false !== ($entry = $dir->read())) {
+				if (!is_file($protocols_path . $entry)) {
+					continue;
+				}
+
+				// Lets get some info on the class
+				$reflection = new ReflectionClass('\\GameQ\\Protocols\\' . pathinfo($entry, PATHINFO_FILENAME)); // TODO - Make Sure This Is Correct Path
+
+				// Check to make sure we can actually load the class
+				if (!$reflection->IsInstantiable()) {
+					continue;
+				}
+
+				// Load up the class so we can get info
+				$class = $reflection->newInstance();
+
+				// Add it to the list
+				$protocols[ $class->name() ] = [
+					'name'  => $class->nameLong(),
+					'state' => $class->state(),
+				];
+
+				// Unset the class
+				unset($class);
+			}
+
+			// Close the directory
+			unset($dir);
+			ksort($protocols);
+			
+			// Lets check to see if SEF is enabled
+			$sefActive = e107::getPref('e_url_list');
+			$checkIsIt = $sefActive['slistsys'];
+			
+			if($checkIsIt == 'slistsys')
+			{
+				$gameQlist = '/gameq';
+			}
+			else
+			{
+				$gameQlist = '{e_PLUGIN}slistsys/supported.php';
+			}
+			
 			$caption = LAN_HELP;
-			$text = 'Some help text';
+			// Lets Count
+			//$text = 'Some help text';
+			// TODO - Replace With LAN!!!!!!!!
+			$text = 'GameQ v3 Supports Up To ('.count($protocols).') Servers<br />
+			 <a href="'.$gameQlist.'" target="_blank">Click Here</a> for the full list.<br /><br />
+			 You dont have to use GameQ to list your servers, just make sure you have<br />
+			 GameQ Off, and have Custom Viewer On, and put in your own custom html code<br />
+			 in the Custom Viewer Code area.';
 
 			return array('caption'=>$caption,'text'=> $text);
 
@@ -436,7 +320,7 @@ class serverlist_submission_ui extends e_admin_ui
 				
 
 
-class serverlist_submission_form_ui extends e_admin_form_ui
+class server_list_form_ui extends e_admin_form_ui
 {
 
 }		

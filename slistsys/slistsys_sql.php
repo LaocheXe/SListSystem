@@ -1,4 +1,4 @@
-<?php exit;?>
+<?php exit; /*?>
 CREATE TABLE IF NOT EXISTS `serverlist` (
   `server_id` int(10) NOT NULL AUTO_INCREMENT,
   `servercat_id` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
@@ -27,3 +27,26 @@ CREATE TABLE IF NOT EXISTS `serverlist_submission` (
   `s_gsid` text,
   PRIMARY KEY (`submit_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1;
+*/
+
+// NOTE: Make It Simple - Use Voice_sql.php as stepping stone - eXe 05-07-2020
+?>
+
+CREATE TABLE IF NOT EXISTS `server_list` (
+  `server_id` int(10) NOT NULL AUTO_INCREMENT,
+  `server_name` varchar(128) NOT NULL,
+  `server_type` varchar(128) DEFAULT NULL,
+  `server_ip` varchar(128) NOT NULL,
+  `server_port` int(12) unsigned NOT NULL,
+  `server_password` varchar(255) DEFAULT NULL,
+  `server_qport` int(12) unsigned DEFAULT NULL,
+  `server_qname` varchar(255) DEFAULT NULL,
+  `server_qpass` varchar(255) DEFAULT NULL,
+  `server_enable_gq` int(12) unsigned NOT NULL,
+  `server_enable_sc` int(12) unsigned NOT NULL,
+  `server_sc` text,
+  `server_enable_vc` int(12) unsigned NOT NULL,
+  `server_viewer_cc` text,
+  `server_sef` varchar(250) default NULL,
+  PRIMARY KEY (`server_id`)
+) ENGINE=MyISAM;

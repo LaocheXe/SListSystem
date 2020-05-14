@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e107Plugin name="Server List" lan="LAN_SLS_NAME" version="1.0" date="2019-09-07" compatibility="2.0" installRequired="true" >
-	<author name="LaocheXe" url="https://github.com/laochexe" />
-	<summary lan="">Game Server List Viwer</summary>
-	<description lan="">List game servers on you website using gametracker, or other methods of your choice.</description>
+<e107Plugin name="Server List System" lan="LAN_XX" version="1.0" date="2020-05-08" compatibility="2.0" installRequired="true" >
+	<author name="LaocheXe" url="https://github.com/LaocheXe" />
+	<summary lan="">Show your servers</summary>
+	<description lan="">Show users on your site your servers. This allows you to add your own gaming servers, and either add your own custom view code, or use the built in GameQ library to query your server that are supported.</description>
 	<keywords>
 		<word>gaming</word>
-		<word>servers</word>
-		<word>list</word>
+		<word>server</word>
+		<word>gameq</word>
 	</keywords>
-	<category>misc</category>
-	<copyright>LaocheXe</copyright>
+	<category>manage</category>
+	<copyright>GNU General Public License v3</copyright>
 	<adminLinks>
 		<link url="admin_config.php" description="" icon="" iconSmall="" icon128="" primary="true" >LAN_CONFIGURE</link>
 	</adminLinks>
+	<siteLinks>
+		<link url="{e_PLUGIN}slistsys/index.php" perm='everyone' lan=''>Server List</link>
+	</siteLinks>
 	<pluginPrefs>
-		<pref name='sl_cathdr'></pref>
-		<pref name='sl_catftr'>4</pref>
+		<pref name='MenuPrefs'>Not Implamented Yet</pref>
 	</pluginPrefs>
 </e107Plugin>
